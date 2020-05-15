@@ -8,3 +8,6 @@
     display:block;
     color:red;
 }
+.none{
+    cursor: default;
+}
