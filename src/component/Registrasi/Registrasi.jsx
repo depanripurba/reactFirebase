@@ -1,9 +1,7 @@
 import React,{useEffect,useState,Fragment} from 'react'
-import io from 'socket.io-client'
 import "./Registrasi.css"
-let socket
+import firebase from '../.././Config/Index'
 const Registrasi = ({login})=>{
-    const ENDPOINT = 'localhost:5000'
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
     const [nama,setNama] = useState(null)
@@ -14,12 +12,7 @@ const Registrasi = ({login})=>{
     var cekgender = false
     var cekalamat = false
     var cekpass = false
-    useEffect(function(){
-        socket = io(ENDPOINT);
-        socket.on('resregister',(data)=>{
-            login(data.data)
-            console.log(cekemail)
-        })
+    useEffect(function(){       
     })
     const Registrasi = (e)=>{
         e.preventDefault()
@@ -58,7 +51,17 @@ const Registrasi = ({login})=>{
             cekpass = true
         }
 
-        socket.emit('registrasi',{email,jenisKelamin,alamat,password,nama})
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
+            console.log(res)
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if(error) {
+                alert(errorMessage)
+            }
+          });
+          
     }
     
     return(
