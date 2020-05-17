@@ -12,17 +12,19 @@ const Registrasi = ({login})=>{
         if(loading === true) {
             valload.innerHTML='loading'
             console.log(valload)
+        }else{
+            valload.innerHTML='Registrasi'
         }
     })
     const Registrasi = (e)=>{
         e.preventDefault()
+        setLoading(true)
         const valemail = document.querySelector("#valemail")
         const valpass = document.querySelector("#valpass")
         console.log(cekemail)
         if(email===null){
             valemail.classList.remove('hidden')
             valemail.classList.add('show')
-            cekemail = true
         }else{
             valemail.classList.remove('show')
             valemail.classList.add('hidden')
@@ -30,7 +32,6 @@ const Registrasi = ({login})=>{
         if(password===null){
             valpass.classList.remove('hidden')
             valpass.classList.add('show')
-            cekpass = true
         }
 
         firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
@@ -44,6 +45,8 @@ const Registrasi = ({login})=>{
             if(error) {
                 alert(errorMessage)
                 console.log('akun anda bermasalah dalam proses pendaftaran akun')
+                setLoading(false)
+                console.log(loading)
             }
             if(!error){
                 console.log('halaman anda tidak error')

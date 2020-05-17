@@ -1,30 +1,42 @@
 import React,{useEffect,useState} from 'react'
-import io from 'socket.io-client'
+import firebase from '../.././Config/Index'
 import "./Login.css"
 import {Link} from 'react-router-dom'
-let socket
 const Login = ({login,nama})=>{
-    const ENDPOINT = 'localhost:5000'
     const [email,setEmail] = useState()
     const [password,setPassword] = useState()
+    const[loading,setLoading] = useState(false)
     useEffect(function(){
-        socket = io(ENDPOINT)
-        socket.on('konfirmasi',data=>{
-                if(data.kode === 1){
-                    login(data.data)
-                    nama(email)
-                }else if(data.kode === 2){
-                    alert(data.pesan)
-                    console.log(data.pesan)
-                }else{
-                    alert(data.pesan)
-                    console.log(data.pesan)
-                }
-        })
+        var valload = document.querySelector('#loading')
+        if(loading === true) {
+            valload.innerHTML='loading'
+            console.log(valload)
+        }else{
+            valload.innerHTML='Login'
+        }
     })
     const cekUSer = (e)=>{
+        setLoading(true)
         e.preventDefault()
-        socket.emit('login',{email:email,password:password})
+        firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
+            setLoading(false)
+            login(true)
+        }).catch(function(error) {
+            let pesan
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorMessage)
+            setLoading(false)
+            console.log(errorCode)
+            if(errorCode === 'auth/user-not-found' ){
+                pesan = "Email yang anda masukkan belum terdaftar di sistem"
+            }else if(errorCode = 'auth/too-many-request'){
+                pesan = "Anda sudah kehabisan kesempatan untuk login\nSilahkan coba beberapa saat lagi"
+            }else if(errorCode === 'wrong-password'){
+                pesan = 'password yang anda masukkan salah'
+            }
+            alert(pesan)
+          });
     
     }
     return(
@@ -40,7 +52,7 @@ const Login = ({login,nama})=>{
                     <input type="password"  id="password" className="form-control" placeholder="input your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                   <button type="submit" name="submit" className="btn btn-primary" onClick={cekUSer} >Login</button>
+                   <button type="submit" name="submit" id="loading"  className="btn btn-primary" onClick={cekUSer} >Login</button>
                 </div> 
                 <div className="form-group">
                   <Link to='/Registrasi'>Anda belum punya akun silahkan registrasi</Link>
