@@ -35,12 +35,18 @@ const Registrasi = ({login})=>{
 
         firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
             console.log(res)
+            console.log('halaman anda baik - baik saja ya')
+            login(true)
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             if(error) {
                 alert(errorMessage)
+                console.log('akun anda bermasalah dalam proses pendaftaran akun')
+            }
+            if(!error){
+                console.log('halaman anda tidak error')
             }
           });
           
