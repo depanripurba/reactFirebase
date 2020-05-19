@@ -1,3 +1,6 @@
+html,body{
+	height:100%;
+}
 .box{
     width: 500px;
     display:block;
@@ -6,12 +9,33 @@
 .bungkus{
 	display: grid;
 	grid-template-columns: 400px auto;
+	grid-template-rows: auto auto 586px;
 }
 .Header{
 	grid-column-start: 1;
 	grid-column-end: 3
 }
 .Kontak{
+	overflow-y:scroll;
 	grid-column-start: 1;
-	grid-column-end: 2
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 5;
+	height: 586px;
+	border: 3px solid black;
+}
+.content{
+	margin:auto;
+}
+.Chatting{
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 5;
+	border: 3px solid black;
+}
+.homeCariAtas{
+	grid-column-start: 1;
+	grid-column-end: 2;
+
 }

@@ -1,32 +1,23 @@
 import React, { Fragment } from "react";
+import './Header.css'
 const Header = () => {
 	return (
 		<Fragment>
-			<div className="Container">
-				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" href="#">
-							Active
+			<div classNameName="contentHeader">
+				<ul className="nav nav-tabs">
+					<li className="nav-item">
+						<a className="nav-link active" href="#">
+							Chatting
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							Link
+					<li className="nav-item">
+						<a className="nav-link" href="#">
+							Your Bio
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							Link
-						</a>
-					</li>
-					<li class="nav-item">
-						<a
-							class="nav-link disabled"
-							href="#"
-							tabindex="-1"
-							aria-disabled="true"
-						>
-							Disabled
+					<li className="nav-item">
+						<a className="nav-link" href="#">
+							Friends Bio
 						</a>
 					</li>
 				</ul>
