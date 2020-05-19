@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import './Kontak.css'
+import {Link} from 'react-router-dom'
 const Kontak = ({kontak})=>{
     const namaa = ['depanri','antoni purba','minalda purba','feriandoni']
     const Chat = (e)=>{
@@ -8,16 +9,16 @@ const Kontak = ({kontak})=>{
     }
     return(
         <div>
-      
-        <ul>
-           { 
-               namaa.map(nama=>{
-                  return(
-                      <p name='kampret' onClick={(e)=>Chat(e)}>{nama}</p>
-                  )
-               })
-           }
-        </ul>
+        <div class="list-group">
+        <Link to="/" className="list-group-item list-group-item-action">Depanri Purba</Link>
+           <a href="#" class="list-group-item list-group-item-action active">
+            Cras justo odio
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+            <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a>
+        </div>
         </div>
     )
 }

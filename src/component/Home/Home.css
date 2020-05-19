@@ -3,3 +3,15 @@
     display:block;
     margin:auto;
 }
+.bungkus{
+	display: grid;
+	grid-template-columns: 400px auto;
+}
+.Header{
+	grid-column-start: 1;
+	grid-column-end: 3
+}
+.Kontak{
+	grid-column-start: 1;
+	grid-column-end: 2
+}

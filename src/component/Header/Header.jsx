@@ -1,14 +1,37 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-const Header = ()=>{
-    return(
-        <div className="header navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container">
-            <Link className="navbar-brand" to="/" > Biochat </Link>
-            <span className="glyphicon glyphicon-eye-open"></span>
-            </div>
-        </div>
-    )
-}
-
-export default Header
+import React, { Fragment } from "react";
+const Header = () => {
+	return (
+		<Fragment>
+			<div className="Container">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">
+							Active
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							Link
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							Link
+						</a>
+					</li>
+					<li class="nav-item">
+						<a
+							class="nav-link disabled"
+							href="#"
+							tabindex="-1"
+							aria-disabled="true"
+						>
+							Disabled
+						</a>
+					</li>
+				</ul>
+			</div>
+		</Fragment>
+	);
+};
+export default Header;
