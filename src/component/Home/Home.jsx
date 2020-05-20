@@ -5,6 +5,7 @@ import Modaljoin from ".././Modaljoin/Modaljoin";
 import Header from ".././Header/Header";
 import Chat from ".././Chat/Chat";
 import Cariatas from ".././Cariatas/Cariatas";
+import Kirim from ".././Kirim/Kirim"
 
 const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
@@ -27,6 +28,10 @@ const Home = ({ user }) => {
                     <div className="Chatting">
                         <Chat />
                     </div>
+                    <div className="Chatting">
+                        <Kirim />
+                    </div>
+
                 </div>
             </div>
         </Fragment>
