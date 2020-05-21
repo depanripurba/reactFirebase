@@ -11,7 +11,6 @@ const Login = ({login,nama})=>{
         var proses = document.querySelector('#proses')
         if(loading === true) {
             valload.innerHTML='loading'
-            console.log(valload)
             proses.classList.add("spinner-border")
         }else{
             valload.innerHTML='Login'
@@ -32,14 +31,14 @@ const Login = ({login,nama})=>{
             console.log(errorMessage)
             setLoading(false)
             console.log(errorCode)
-            if(errorCode === 'auth/user-not-found' ){
-                pesan = "Email yang anda masukkan belum terdaftar di sistem"
-            }else if(errorCode = 'auth/too-many-request'){
-                pesan = "Anda sudah kehabisan kesempatan untuk login\nSilahkan coba beberapa saat lagi"
-            }else if(errorCode === 'wrong-password'){
-                pesan = 'password yang anda masukkan salah'
+            if(errorMessage === 'The email address is badly formatted.'){
+              alert('Format email anda tidak valid')
+            }else if(errorMessage === 'There is no user record corresponding to this identifier. The user may have been deleted.'){
+              alert('Email anda tidak terdaftar di sistem kami')
+            }else{
+              alert('Password anda salah\nMasukkan password yang benar')
             }
-            alert(pesan)
+
           });
 
     }
