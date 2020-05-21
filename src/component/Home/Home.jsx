@@ -6,6 +6,7 @@ import Header from ".././Header/Header";
 import Chat from ".././Chat/Chat";
 import Cariatas from ".././Cariatas/Cariatas";
 import Kirim from ".././Kirim/Kirim"
+import Res from '.././Res/Res'
 
 const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
@@ -18,6 +19,9 @@ const Home = ({ user }) => {
                 <div className="bungkus">
                     <div className="Header">
                         <Header />
+                    </div>
+                    <div className="Res">
+                        <Res />
                     </div>
                     <div className="homeCariAtas">
                         <Cariatas />

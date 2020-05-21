@@ -3,8 +3,8 @@ import firebase from '../.././Config/Index'
 import "./Login.css"
 import {Link} from 'react-router-dom'
 const Login = ({login,nama})=>{
-    const [email,setEmail] = useState()
-    const [password,setPassword] = useState()
+    const [email,setEmail] = useState(null)
+    const [password,setPassword] = useState(null)
     const[loading,setLoading] = useState(false)
     useEffect(function(){
         var valload = document.querySelector('#loading')
@@ -18,28 +18,37 @@ const Login = ({login,nama})=>{
         }
     })
     const cekUSer = (e)=>{
-        setLoading(true)
         e.preventDefault()
-        firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
-            setLoading(false)
-            login(true)
-            console.log(res)
-        }).catch(function(error) {
-            let pesan
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage)
-            setLoading(false)
-            console.log(errorCode)
-            if(errorMessage === 'The email address is badly formatted.'){
-              alert('Format email anda tidak valid')
-            }else if(errorMessage === 'There is no user record corresponding to this identifier. The user may have been deleted.'){
-              alert('Email anda tidak terdaftar di sistem kami')
-            }else{
-              alert('Password anda salah\nMasukkan password yang benar')
-            }
+        if(email === null && password === null){
+          return null
+        }else{
+          setLoading(true)
+          firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
+              setLoading(false)
+              login(true)
+              console.log(res)
+          }).catch(function(error) {
+              let pesan
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorMessage)
+              setLoading(false)
+              console.log(errorCode)
+              if(errorMessage === 'The email address is badly formatted.'){
+                alert('Format email anda tidak valid')
+              }else if(errorMessage === 'There is no user record corresponding to this identifier. The user may have been deleted.'){
+                alert('Email anda tidak terdaftar di sistem kami')
+              }else if(errorMessage === 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.'){
+                alert('Tidak dapat konek ke server\nPastikan anda terhubung ke internet')
+              }
 
-          });
+              else{
+                alert('Password anda salah\nMasukkan password yang benar')
+              }
+
+            });
+        }
+
 
     }
     return(

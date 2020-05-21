@@ -20,7 +20,6 @@ const Registrasi = ({login})=>{
     })
     const Registrasi = (e)=>{
         e.preventDefault()
-        setLoading(true)
         const valemail = document.querySelector("#valemail")
         const valpass = document.querySelector("#valpass")
         console.log(cekemail)
@@ -35,24 +34,29 @@ const Registrasi = ({login})=>{
             valpass.classList.remove('hidden')
             valpass.classList.add('show')
         }
+        if(email === null && password === null){
+          return null
+        }else{
+          setLoading(true)
+          firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
+              console.log(res)
+              login(true)
+              setLoading(false)
+          }).catch(function(error) {
+              // Handle Errors here.
+              setLoading(false)
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              if(errorMessage === 'The email address is already in use by another account.'){
+                alert('Email ini sudah digunakan\nGunakan alamat email lain')
+              }else if(errorMessage === 'The email address is badly formatted.'){
+                alert('Harap masukkan email dengan format yang benar')
+              }else{
+                alert('Password harus lebih dari 6 karakter')
+              }
+            });
+        }
 
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
-            console.log(res)
-            login(true)
-            setLoading(false)
-        }).catch(function(error) {
-            // Handle Errors here.
-            setLoading(false)
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if(errorMessage === 'The email address is already in use by another account.'){
-              alert('Email ini sudah digunakan\nGunakan alamat email lain')
-            }else if(errorMessage === 'The email address is badly formatted.'){
-              alert('Harap masukkan email dengan format yang benar')
-            }else{
-              alert('Password harus lebih dari 6 karakter')
-            }
-          });
 
     }
 
