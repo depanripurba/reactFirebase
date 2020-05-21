@@ -8,11 +8,14 @@ const Login = ({login,nama})=>{
     const[loading,setLoading] = useState(false)
     useEffect(function(){
         var valload = document.querySelector('#loading')
+        var proses = document.querySelector('#proses')
         if(loading === true) {
             valload.innerHTML='loading'
             console.log(valload)
+            proses.classList.add("spinner-border")
         }else{
             valload.innerHTML='Login'
+            proses.classList.remove("spinner-border")
         }
     })
     const cekUSer = (e)=>{
@@ -21,6 +24,7 @@ const Login = ({login,nama})=>{
         firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
             setLoading(false)
             login(true)
+            console.log(res)
         }).catch(function(error) {
             let pesan
             var errorCode = error.code;
@@ -37,7 +41,7 @@ const Login = ({login,nama})=>{
             }
             alert(pesan)
           });
-    
+
     }
     return(
         <div className="container lebar mt-5">
@@ -46,20 +50,23 @@ const Login = ({login,nama})=>{
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>
                     <input type="email"  id="Email" className="form-control" placeholder="input your email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-                </div> 
+                </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input type="password"  id="password" className="form-control" placeholder="input your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                   <button type="submit" name="submit" id="loading"  className="btn btn-primary" onClick={cekUSer} >Login</button>
-                </div> 
+                <button className="btn btn-primary" type="button"  onClick = {cekUSer}>
+                  <span className="spinner-border-sm" role="status" aria-hidden="true" id = 'proses'></span>
+                  <span id = 'loading'></span>
+                </button>
+                </div>
                 <div className="form-group">
                   <Link to='/Registrasi'>Anda belum punya akun silahkan registrasi</Link>
-                </div>         
+                </div>
             </form>
             </div>
-           
+
         </div>
     )
 }

@@ -10,7 +10,7 @@ import Kirim from ".././Kirim/Kirim"
 const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
     useEffect(() => {
-        console.log(user);
+        // console.log(user);
     });
     return (
         <Fragment>
@@ -28,10 +28,6 @@ const Home = ({ user }) => {
                     <div className="Chatting">
                         <Chat />
                     </div>
-                    <div className="Chatting">
-                        <Kirim />
-                    </div>
-
                 </div>
             </div>
         </Fragment>
