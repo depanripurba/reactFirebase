@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyB4Kc6P0dOxFqDsNdCjYzV-3zEf0yYPJUI",
     authDomain: "biochat-371ca.firebaseapp.com",
     databaseURL: "https://biochat-371ca.firebaseio.com",
@@ -13,4 +13,5 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-  export default firebase
+export const database = firebase.database();
+export default firebase

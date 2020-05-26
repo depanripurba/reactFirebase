@@ -7,11 +7,12 @@ import Home from "./component/Home/Home";
 import Uploadfoto from "./component/Uploadfoto/Uploadfoto";
 
 const App = () => {
-    var [login, setLogin] = useState(true);
+    var [login, setLogin] = useState(false);
     var [user, setUser] = useState("");
 
     return (
         <Router>
+        {console.log(user)}
             <Route
                 path="/"
                 exact
@@ -22,6 +23,7 @@ const App = () => {
                         <Login
                             nama={(nilai) => setUser(nilai)}
                             login={(value) => setLogin(value)}
+
                         />
                     )
                 }

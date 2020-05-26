@@ -22,11 +22,13 @@ const Login = ({login,nama})=>{
         if(email === null && password === null){
           return null
         }else{
+
           setLoading(true)
           firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
               setLoading(false)
               login(true)
-              console.log(res)
+              nama(res.user.uid)
+              console.log(res.user)
           }).catch(function(error) {
               let pesan
               var errorCode = error.code;
@@ -40,9 +42,7 @@ const Login = ({login,nama})=>{
                 alert('Email anda tidak terdaftar di sistem kami')
               }else if(errorMessage === 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.'){
                 alert('Tidak dapat konek ke server\nPastikan anda terhubung ke internet')
-              }
-
-              else{
+              }else{
                 alert('Password anda salah\nMasukkan password yang benar')
               }
 

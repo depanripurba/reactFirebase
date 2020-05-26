@@ -7,11 +7,19 @@ import Chat from ".././Chat/Chat";
 import Cariatas from ".././Cariatas/Cariatas";
 import Kirim from ".././Kirim/Kirim"
 import Res from '.././Res/Res'
+import {database} from '../.././Config/Index'
 
 const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
+    const [result, setresult] = useState([])
     useEffect(() => {
-        // console.log(user);
+      console.log(result)
+        let data = database.ref('users/' + user )
+        data.on('value',function(snapsot){
+          // setresult(snapsot.val())
+          console.log(snapsot.val())
+        })
+        console.log(user);
     });
     return (
         <Fragment>

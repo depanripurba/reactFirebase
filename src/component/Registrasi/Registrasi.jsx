@@ -1,6 +1,7 @@
 import React,{useEffect,useState,Fragment} from 'react'
 import "./Registrasi.css"
 import firebase from '../.././Config/Index'
+import {database} from '../.././Config/Index'
 const Registrasi = ({login})=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
@@ -19,6 +20,19 @@ const Registrasi = ({login})=>{
         }
     })
     const Registrasi = (e)=>{
+      //fungsi untuk memasukkan data ke database firebase
+      function Adduser(user){
+        database.ref('users/').child(user).set({
+          username: 'depanri purba',
+          email: {
+            pertama: 'Antoni',
+            Kedua: 'Minalda',
+            Ketiga: 'Feriandoni'
+          },
+          profile_picture : 'imageUrl'
+          });
+      }
+      //akhir dari fungsi memasukkan data ke database
         e.preventDefault()
         const valemail = document.querySelector("#valemail")
         const valpass = document.querySelector("#valpass")
@@ -39,7 +53,7 @@ const Registrasi = ({login})=>{
         }else{
           setLoading(true)
           firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
-              console.log(res)
+              Adduser(res.user.uid)
               login(true)
               setLoading(false)
           }).catch(function(error) {
@@ -52,7 +66,7 @@ const Registrasi = ({login})=>{
               }else if(errorMessage === 'The email address is badly formatted.'){
                 alert('Harap masukkan email dengan format yang benar')
               }else{
-                alert('Password harus lebih dari 6 karakter')
+                alert("panjang password anda harus lebih dari 6 karakter")
               }
             });
         }
