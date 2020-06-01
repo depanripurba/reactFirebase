@@ -32,33 +32,7 @@ const Kontak = ({ kontak }) => {
                 <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
                     Depanri Purba
                 </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>
-                    Depanri Purba
-                </Link>
+                
 
             </div>
         </div>

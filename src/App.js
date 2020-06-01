@@ -9,6 +9,7 @@ import Uploadfoto from "./component/Uploadfoto/Uploadfoto";
 const App = () => {
     var [login, setLogin] = useState(false);
     var [user, setUser] = useState("");
+    const [result, setresult] = useState([])
 
     return (
         <Router>
@@ -18,10 +19,10 @@ const App = () => {
                 exact
                 render={() =>
                     login === true ? (
-                        <Home user={user} />
+                        <Home user={user} kontak={(value)=>setresult(value)} />
                     ) : (
                         <Login
-                            nama={(nilai) => setUser(nilai)}
+                            user={(nilai) => setUser(nilai)}
                             login={(value) => setLogin(value)}
 
                         />
@@ -33,7 +34,7 @@ const App = () => {
                 path="/Registrasi"
                 render={() =>
                     login === false ? (
-                        <Registrasi login={(value) => setLogin(value)} />
+                        <Registrasi login={(value) => setLogin(value)} user={(value)=>setUser(value)} />
                     ) : (
                         <Home user={user} />
                     )
@@ -46,7 +47,7 @@ const App = () => {
                         <Uploadfoto user={user} />
                     ) : (
                         <Login
-                            nama={(nilai) => setUser(nilai)}
+                            user={(value)=>setUser(value)}
                             login={(value) => setLogin(value)}
                         />
                     )

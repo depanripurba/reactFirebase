@@ -2,9 +2,10 @@ import React,{useEffect,useState,Fragment} from 'react'
 import "./Registrasi.css"
 import firebase from '../.././Config/Index'
 import {database} from '../.././Config/Index'
-const Registrasi = ({login})=>{
+const Registrasi = ({login,user})=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
+    const [nama, setnama] = useState(null)
     const [loading,setLoading] = useState(false)
     var cekemail = false
     var cekpass = false
@@ -21,21 +22,35 @@ const Registrasi = ({login})=>{
     })
     const Registrasi = (e)=>{
       //fungsi untuk memasukkan data ke database firebase
-      function Adduser(user){
+      function Adduser(user,nama,email){
+        const db = firebase.firestore()
+        db.settings({
+          timestampsInSnapshots: true
+        })
+        const userRef = db.collection('dpengguna').doc(user).set({
+          nama:nama,
+          email:email,
+          teman:[
+            "Depanri","Antoni","Minalda","Doni"
+          ]
+        })
         database.ref('users/').child(user).set({
-          username: 'depanri purba',
-          email: {
-            pertama: 'Antoni',
-            Kedua: 'Minalda',
-            Ketiga: 'Feriandoni'
+          username: nama,
+          email: email,
+          teman:{
+            'satu' : 'Depanri Purba'
           },
           profile_picture : 'imageUrl'
           });
+      }
+      function daftarkan(nama,email){
+        database.ref('pengguna/').push(email)
       }
       //akhir dari fungsi memasukkan data ke database
         e.preventDefault()
         const valemail = document.querySelector("#valemail")
         const valpass = document.querySelector("#valpass")
+        const vallnam = document.querySelector("#vallnam")
         console.log(cekemail)
         if(email===null){
             valemail.classList.remove('hidden')
@@ -43,6 +58,13 @@ const Registrasi = ({login})=>{
         }else{
             valemail.classList.remove('show')
             valemail.classList.add('hidden')
+        }
+        if(nama===null){
+            vallnam.classList.remove('hidden')
+            vallnam.classList.add('show')
+        }else{
+            vallnam.classList.remove('show')
+            vallnam.classList.add('hidden')
         }
         if(password===null){
             valpass.classList.remove('hidden')
@@ -53,8 +75,10 @@ const Registrasi = ({login})=>{
         }else{
           setLoading(true)
           firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
-              Adduser(res.user.uid)
+              Adduser(res.user.uid,nama,email)
+              daftarkan(nama,email)
               login(true)
+              user(res.user.uid)
               setLoading(false)
           }).catch(function(error) {
               // Handle Errors here.
@@ -66,7 +90,7 @@ const Registrasi = ({login})=>{
               }else if(errorMessage === 'The email address is badly formatted.'){
                 alert('Harap masukkan email dengan format yang benar')
               }else{
-                alert("panjang password anda harus lebih dari 6 karakter")
+                alert(errorMessage)
               }
             });
         }
@@ -84,6 +108,11 @@ const Registrasi = ({login})=>{
                     <label htmlFor="Email">Email</label>
                     <input type="email" id="Email" className="form-control" placeholder="input your email" value={email} onChange={(e)=>setEmail(e.target.value)} />
                     <label htmlFor="" className='hidden' id='valemail'>*Email tidak boleh kosong</label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="Name">Nama</label>
+                    <input type="text" id="Name" className="form-control" placeholder="input your name" value={nama} onChange={(e)=>setnama(e.target.value)} />
+                    <label htmlFor="" className='hidden' id='vallnam'>*Nama tidak boleh kosong</label>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>

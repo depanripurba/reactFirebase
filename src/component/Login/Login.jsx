@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import firebase from '../.././Config/Index'
 import "./Login.css"
 import {Link} from 'react-router-dom'
-const Login = ({login,nama})=>{
+const Login = ({user,login})=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
     const[loading,setLoading] = useState(false)
@@ -27,8 +27,8 @@ const Login = ({login,nama})=>{
           firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
               setLoading(false)
               login(true)
-              nama(res.user.uid)
-              console.log(res.user)
+              user(res.user.uid)
+              console.log(res.user.uid)
           }).catch(function(error) {
               let pesan
               var errorCode = error.code;
