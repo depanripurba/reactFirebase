@@ -27,7 +27,7 @@ const Registrasi = ({login,user})=>{
         db.settings({
           timestampsInSnapshots: true
         })
-        const userRef = db.collection('dpengguna').doc(user).set({
+        const userRef = db.collection('dpengguna').doc(email).set({
           nama:nama,
           email:email,
           teman:[

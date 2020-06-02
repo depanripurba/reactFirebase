@@ -1,15 +1,23 @@
 import React, { Fragment, useEffect,useState } from "react"
-import {database} from '../.././Config/Index'
+import firebase from '../.././Config/Index'
+const db = firebase.firestore()
 const Cariatas = () => {
 	const [pengguna, setpengguna] = useState([])
-	const atp = ()=>{
-		const data = database.ref('pengguna').startAt('Dep')
-		data.on('value',function(snapsot){
-			let data = snapsot.val()
-			console.log(data)
-		})
-		console.log('ini adalah fungsion pengguna')
-	}
+	const [query,setquery] = useState([])
+	const atp = (e)=>{
+	setquery(e.target.value)
+	db.collection("dpengguna").where("nama", "<=","Dep" )
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+			console.log(doc.id, " => ", doc.data());
+			console.log(query)
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+	} 
 	return (
 		<Fragment>
 		<div className="cariAtasHome">
@@ -18,7 +26,7 @@ const Cariatas = () => {
 					<span className="input-group-text">Cari</span>
 				</div>
 				<input
-				onChange={atp}
+				onChange={(e)=>atp(e)}
 					type="text"
 					aria-label="First name"
 					className="form-control"

@@ -15,18 +15,7 @@ const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
     const [result, setresult] = useState([])
     useEffect(() => {
-      console.log(result)
-      db.collection("dpengguna").where("nama", "<=", "depan")
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
+     
 
         // let data = database.ref('users/' + user )
         // data.on('value',function(snapsot){
