@@ -6,7 +6,7 @@ const Cariatas = () => {
 	const [query,setquery] = useState([])
 	const atp = (e)=>{
 	setquery(e.target.value)
-	db.collection("dpengguna").where("nama", "<=","Dep" )
+	db.collection("dpengguna")
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {

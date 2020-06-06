@@ -15,14 +15,7 @@ const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
     const [result, setresult] = useState([])
     useEffect(() => {
-     
-
-        // let data = database.ref('users/' + user )
-        // data.on('value',function(snapsot){
-        //   // setresult(snapsot.val())
-        //   console.log(snapsot.val())
-        // })
-        // console.log(user);
+     console.log(user)
     });
     return (
         <Fragment>
