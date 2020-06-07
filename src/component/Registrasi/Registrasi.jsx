@@ -37,9 +37,12 @@ const Registrasi = ({login,user})=>{
         database.ref('users/').child(user).set({
           username: nama,
           email: email,
-          teman:{
-            'satu' : 'Depanri Purba'
-          },
+          teman:[
+            "Depanri Purba",
+            "Antoni Purba",
+            "Minalda Purba",
+            "Feriandoni Purba"
+          ],
           profile_picture : 'imageUrl'
           });
       }

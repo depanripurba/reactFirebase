@@ -9,15 +9,10 @@ import firebase from './Config/Index.js'
 
 const App = () => {
     var [login, setLogin] = useState(false);
+    const [kontak, setkontak] = useState("")
     var [user, setUser] = useState("");
     const [result, setresult] = useState([])
-    useEffect(()=>{
-        console.log('nama saya adalah depanri purba')
-            var starCountRef = firebase.database().ref('users/' + user );
-            starCountRef.on('value', function(snapshot) {
-            console.log(snapshot.val());
-            });
-        })
+    console.log('ini adalah budi')
 
     return (
         <Router>
@@ -27,7 +22,7 @@ const App = () => {
                 exact
                 render={() =>
                     login === true ? (
-                        <Home user={user} kontak={(value)=>setresult(value)} />
+                        <Home user={user} />
                     ) : (
                         <Login
                             user={(nilai) => setUser(nilai)}

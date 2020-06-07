@@ -7,7 +7,6 @@ import Chat from ".././Chat/Chat";
 import Cariatas from ".././Cariatas/Cariatas";
 import Kirim from ".././Kirim/Kirim"
 import Res from '.././Res/Res'
-import {database} from '../.././Config/Index'
 import firebase from '../.././Config/Index'
 const db = firebase.firestore()
 
@@ -15,7 +14,13 @@ const Home = ({ user }) => {
     const [kontak, setKontak] = useState();
     const [result, setresult] = useState([])
     useEffect(() => {
-     console.log(user)
+      // var starCountRef = firebase.database().ref('users/' + user );
+      // starCountRef.on('value', function(snapshot) {
+      //   const isi = snapshot.val()
+      //   const teman = isi.teman
+      // console.log(isi.teman);
+      // console.log(kontak)
+      // });
     });
     return (
         <Fragment>
@@ -31,7 +36,7 @@ const Home = ({ user }) => {
                         <Cariatas />
                     </div>
                     <div className="Kontak">
-                        <Kontak />
+                        <Kontak user = {user}/>
                     </div>
                     <div className="Chatting">
                         <Chat />
