@@ -4,14 +4,18 @@ import firebase from '../.././Config/Index'
 import { Link } from "react-router-dom";
 const Kontak = ({ user }) => {
 
+  class v{
+    constructor(r){
+      this.nama = r
+    }
+  }
+
     const array = ["depanri","antoni","minalda","doni"]
     const starCountRef = firebase.database().ref('users/' + user );
     starCountRef.on('value',function(snapshot){
-      let nama = snapshot.val().teman
-      nama.map((teman)=>(console.log(teman)))
+      var c = new v(snapshot.val())
     })
-
-
+console.log(c.nama)
     const [link, setlink] = useState([])
     const Chat = (e) => {
         console.log(e.target.innerHTML);
@@ -20,6 +24,7 @@ const Kontak = ({ user }) => {
 
 
     useEffect(()=>{
+
       console.log('harusnya di atas ini adalah daftar semua kontak')
       console.log(link)
       if(link.length>0){
