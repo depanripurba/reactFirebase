@@ -1,7 +1,7 @@
 import React,{useEffect,useState,Fragment} from 'react'
 import "./Registrasi.css"
-import firebase from '../.././Config/Index'
-import {database} from '../.././Config/Index'
+import firebase from '../.././Config/Firebase'
+import {database} from '../.././Config/Firebase'
 const Registrasi = ({login,user})=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)

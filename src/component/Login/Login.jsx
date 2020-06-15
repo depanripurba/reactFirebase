@@ -1,12 +1,16 @@
 import React,{useEffect,useState} from 'react'
-import firebase from '../.././Config/Index'
+import firebase from '../.././Config/Firebase'
 import "./Login.css"
 import {Link} from 'react-router-dom'
-const Login = ({user,login})=>{
+import {connect} from 'react-redux'
+import {ubahuser, ubahlogin, datauser} from '../../Config/Redux'
+const Login = (props)=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
     const[loading,setLoading] = useState(false)
-    useEffect(function(){
+useEffect(function(){
+      console.log(props.user)
+      console.log(props.login)
         var valload = document.querySelector('#loading')
         var proses = document.querySelector('#proses')
         if(loading === true) {
@@ -22,13 +26,13 @@ const Login = ({user,login})=>{
         if(email === null && password === null){
           return null
         }else{
-
           setLoading(true)
           firebase.auth().signInWithEmailAndPassword(email, password).then(res=>{
               setLoading(false)
-              login(true)
-              user(res.user.uid)
-              console.log(res.user.uid)
+              props.rubahlogin(true)
+              props.datauser(res.user.uid)
+              const uid = res.user.uid
+              localStorage.setItem('uid',uid)
           }).catch(function(error) {
               let pesan
               var errorCode = error.code;
@@ -79,4 +83,17 @@ const Login = ({user,login})=>{
     )
 }
 
-export default Login
+const method = (dispatch)=>{
+  return{
+    rubahlogin:(value)=>dispatch(ubahlogin(value)),
+    rubahuser:(user)=>dispatch(ubahuser(user)),
+    datauser:(value)=>dispatch(datauser(value))
+  }
+}
+const data = (state)=>{
+  return{
+    login : state.login,
+    user: state.user
+  }
+}
+export default connect(data,method)(Login)

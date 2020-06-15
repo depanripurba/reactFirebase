@@ -1,27 +1,22 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./Home.css";
-import Kontak from ".././Kontak/Kontak";
+import Kontak from ".././Kontak/Kontak1";
 import Modaljoin from ".././Modaljoin/Modaljoin";
 import Header from ".././Header/Header";
 import Chat from ".././Chat/Chat";
 import Cariatas from ".././Cariatas/Cariatas";
 import Kirim from ".././Kirim/Kirim"
 import Res from '.././Res/Res'
-import firebase from '../.././Config/Index'
-const db = firebase.firestore()
-
-const Home = ({ user }) => {
-    const [kontak, setKontak] = useState();
-    const [result, setresult] = useState([])
-    useEffect(() => {
-      // var starCountRef = firebase.database().ref('users/' + user );
-      // starCountRef.on('value', function(snapshot) {
-      //   const isi = snapshot.val()
-      //   const teman = isi.teman
-      // console.log(isi.teman);
-      // console.log(kontak)
-      // });
-    });
+import {updatekontak} from '../../Config/Redux'
+import {connect} from 'react-redux'
+class Home extends React.Component{
+  componentDidMount(){
+    const userdata = localStorage.getItem('uid')
+    console.log(`${userdata} : ini adalah userdata anda home`)
+    this.props.getkontak(userdata)
+    console.log(this.props.kontak)
+  }
+  render(){
     return (
         <Fragment>
             <div className="content">
@@ -36,7 +31,7 @@ const Home = ({ user }) => {
                         <Cariatas />
                     </div>
                     <div className="Kontak">
-                        <Kontak user = {user}/>
+                        <Kontak/>
                     </div>
                     <div className="Chatting">
                         <Chat />
@@ -45,5 +40,18 @@ const Home = ({ user }) => {
             </div>
         </Fragment>
     );
-};
-export default Home;
+  }
+}
+const method = (dispatch)=>{
+  return{
+    getkontak:(value)=>dispatch(updatekontak(value)),
+  }
+}
+const data = (state)=>{
+  return{
+    login : state.login,
+    datauser : state.datauser,
+    kontak : state.kontak
+  }
+}
+export default connect(data,method)(Home);

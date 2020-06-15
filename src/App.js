@@ -5,23 +5,24 @@ import Chat from "./component/Chat/Chat";
 import Login from "./component/Login/Login";
 import Home from "./component/Home/Home";
 import Uploadfoto from "./component/Uploadfoto/Uploadfoto";
-import firebase from './Config/Index.js'
+import firebase from './Config/Firebase/index.js'
+import {connect} from 'react-redux'
 
-const App = () => {
+const App = (props) => {
     var [login, setLogin] = useState(false);
     const [kontak, setkontak] = useState("")
     var [user, setUser] = useState("");
     const [result, setresult] = useState([])
-    console.log('ini adalah budi')
+
 
     return (
         <Router>
-        {console.log(user)}
+
             <Route
                 path="/"
                 exact
                 render={() =>
-                    login === true ? (
+                    props.login === true ? (
                         <Home user={user} />
                     ) : (
                         <Login
@@ -36,7 +37,7 @@ const App = () => {
             <Route
                 path="/Registrasi"
                 render={() =>
-                    login === false ? (
+                    props.login === false ? (
                         <Registrasi login={(value) => setLogin(value)} user={(value)=>setUser(value)} />
                     ) : (
                         <Home user={user} />
@@ -46,12 +47,11 @@ const App = () => {
             <Route
                 path="/uploadfoto"
                 render={() =>
-                    login === true ? (
+                    props.login === true ? (
                         <Uploadfoto user={user} />
                     ) : (
                         <Login
                             user={(value)=>setUser(value)}
-                            login={(value) => setLogin(value)}
                         />
                     )
                 }
@@ -59,5 +59,16 @@ const App = () => {
         </Router>
     );
 };
-
-export default App;
+// const method = (dispatch)=>{
+//   return{
+//     rubahlogin:(value)=>dispatch(ubahlogin(value)),
+//     rubahuser:(user)=>dispatch(ubahuser(user))
+//   }
+// }
+const data = (state)=>{
+  return{
+    login : state.login,
+    user: state.user
+  }
+}
+export default connect(data,null)(App)

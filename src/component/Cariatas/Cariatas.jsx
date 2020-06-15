@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect,useState } from "react"
-import firebase from '../.././Config/Index'
+import firebase from '../.././Config/Firebase'
 const db = firebase.firestore()
 const Cariatas = () => {
 	const [pengguna, setpengguna] = useState([])
@@ -17,7 +17,7 @@ const Cariatas = () => {
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
-	} 
+	}
 	return (
 		<Fragment>
 		<div className="cariAtasHome">
