@@ -2,7 +2,9 @@ import React,{useEffect,useState,Fragment} from 'react'
 import "./Registrasi.css"
 import firebase from '../.././Config/Firebase'
 import {database} from '../.././Config/Firebase'
-const Registrasi = ({login,user})=>{
+import {connect} from 'react-redux'
+import {ubahuser, ubahlogin, datauser} from '../../Config/Redux'
+const Registrasi = (props)=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
     const [nama, setnama] = useState(null)
@@ -80,8 +82,10 @@ const Registrasi = ({login,user})=>{
           firebase.auth().createUserWithEmailAndPassword(email, password).then(res=>{
               Adduser(res.user.uid,nama,email)
               daftarkan(nama,email)
-              login(true)
-              user(res.user.uid)
+              props.rubahlogin(true)
+              props.datauser(res.user.uid)
+              const uid = res.user.uid
+              localStorage.setItem('uid',uid)
               setLoading(false)
           }).catch(function(error) {
               // Handle Errors here.
@@ -135,4 +139,18 @@ const Registrasi = ({login,user})=>{
     )
 }
 
-export default Registrasi
+const method = (dispatch)=>{
+  return{
+    rubahlogin:(value)=>dispatch(ubahlogin(value)),
+    rubahuser:(user)=>dispatch(ubahuser(user)),
+    datauser:(value)=>dispatch(datauser(value))
+  }
+}
+const data = (state)=>{
+  return{
+    login : state.login,
+    user: state.user
+  }
+}
+
+export default connect(data,method)(Registrasi)

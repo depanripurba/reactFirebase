@@ -22,3 +22,7 @@ export const updatekontak = (value)=>(dispatch)=>{
     console.log(result)
   })
 }
+
+export const updatestatuschat = (value)=>(dispatch)=>{
+    dispatch({type:'UBAHSTATUSCHAT',value:value})
+}

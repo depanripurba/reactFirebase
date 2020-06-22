@@ -40,8 +40,8 @@ const Kontak = (props) => {
             <div>
             <div className="list-group">
             {
-              array.map((tes)=>(
-                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}>cek</Link>
+              props.kontak.map((tes)=>(
+                <Link to="/" className="list-group-item list-group-item-action" onClick={(e)=>Active(e)}> {tes} </Link>
               ))
             }
                 </div>

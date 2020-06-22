@@ -31,6 +31,7 @@ useEffect(function(){
               setLoading(false)
               props.rubahlogin(true)
               props.datauser(res.user.uid)
+              console.log(res)
               const uid = res.user.uid
               localStorage.setItem('uid',uid)
           }).catch(function(error) {
