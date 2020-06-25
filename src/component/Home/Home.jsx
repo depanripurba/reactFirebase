@@ -15,7 +15,7 @@ class Home extends React.Component{
     console.log(`${userdata} : ini adalah userdata anda home`)
     this.props.getkontak(userdata)
     console.log(this.props.kontak)
-  }
+  } 
   render(){
     return (
         <Fragment>
@@ -55,3 +55,4 @@ const data = (state)=>{
   }
 }
 export default connect(data,method)(Home);
+

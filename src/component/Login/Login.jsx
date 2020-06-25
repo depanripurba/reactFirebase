@@ -3,12 +3,17 @@ import firebase from '../.././Config/Firebase'
 import "./Login.css"
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {ubahuser, ubahlogin, datauser} from '../../Config/Redux'
+import {ubahuser, ubahlogin, datauser, updatekontak} from '../../Config/Redux'
 const Login = (props)=>{
     const [email,setEmail] = useState(null)
     const [password,setPassword] = useState(null)
     const[loading,setLoading] = useState(false)
 useEffect(function(){
+  if(localStorage.getItem('uid')){
+    props.rubahlogin(true)
+  }else{
+    console.log("tidak ada user id disini")
+  }
       console.log(props.user)
       console.log(props.login)
         var valload = document.querySelector('#loading')
@@ -34,6 +39,9 @@ useEffect(function(){
               console.log(res)
               const uid = res.user.uid
               localStorage.setItem('uid',uid)
+              console.log(res)
+              console.log("sebaiknya disini saja anda update kontaknya bro")
+              props.getkontak(uid)
           }).catch(function(error) {
               let pesan
               var errorCode = error.code;
@@ -88,7 +96,8 @@ const method = (dispatch)=>{
   return{
     rubahlogin:(value)=>dispatch(ubahlogin(value)),
     rubahuser:(user)=>dispatch(ubahuser(user)),
-    datauser:(value)=>dispatch(datauser(value))
+    datauser:(value)=>dispatch(datauser(value)),
+    getkontak:(value)=>dispatch(updatekontak(value)),
   }
 }
 const data = (state)=>{
